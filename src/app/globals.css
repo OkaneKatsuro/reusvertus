@@ -1,26 +1,69 @@
 @import "tailwindcss";
 
+/* NATS Font for Footer Initials */
+@font-face {
+  font-family: 'NATS';
+  src: url('/fonts/NATS-Regular.woff2') format('woff2'),
+       url('/fonts/NATS-Regular.woff') format('woff'),
+       url('/fonts/NATS-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-1: #FFF8F0;
+  --bg-2: #D0DEBB;
+  --bg-3: #050517;
+  --bg-4: #006341;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Custom colors */
+  --color-bg-1: var(--bg-1);
+  --color-bg-2: var(--bg-2);
+  --color-bg-3: var(--bg-3);
+  --color-bg-4: var(--bg-4);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Font */
+  --font-sans: var(--font-ibm-plex-mono);
+  --font-mono: var(--font-ibm-plex-mono);
+
+  /* Typography - H1 */
+  --font-size-h1: 24px;
+  --line-height-h1: 95%;
+  --letter-spacing-h1: -2%;
+
+  /* Typography - H2 */
+  --font-size-h2: 16px;
+  --line-height-h2: 80%;
+  --letter-spacing-h2: -2%;
+
+  /* Typography - Link */
+  --font-size-link: 16px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-ibm-plex-mono), monospace;
+}
+
+/* Typography styles */
+h1 {
+  font-size: 24px;
+  line-height: 95%;
+  letter-spacing: -0.02em;
+  font-family: var(--font-ibm-plex-mono), monospace;
+}
+
+h2 {
+  font-size: 16px;
+  line-height: 80%;
+  letter-spacing: -0.02em;
+  font-family: var(--font-ibm-plex-mono), monospace;
+}
+
+a {
+  font-size: 16px;
+  font-weight: 400;
+  font-family: var(--font-ibm-plex-mono), monospace;
 }
