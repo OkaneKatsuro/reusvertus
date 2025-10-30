@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 export default function Hero() {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -19,12 +20,24 @@ export default function Hero() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    // Trigger animation after component mounts
+    const timer = setTimeout(() => {
+      setMounted(true);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   // Mobile version
   if (isMobile) {
     return (
-      <div className="relative w-full h-[450px]">
-        {/* Image right */}
-        <div className="absolute top-0 right-0 w-[251.764px] h-[239px]">
+      <div className="relative w-full h-[450px] overflow-hidden">
+        {/* Image right - slides from right */}
+        <div
+          className={`absolute top-0 right-0 w-[251.764px] h-[239px] transition-transform duration-1000 ease-out ${
+            mounted ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
           <Image
             src="/hero/hero2.jpeg"
             alt="Woman with sunglasses walking down runway"
@@ -34,8 +47,12 @@ export default function Hero() {
           />
         </div>
 
-        {/* Image left */}
-        <div className="absolute bottom-0 left-0 w-[166.829px] h-[216px]">
+        {/* Image left - slides from left */}
+        <div
+          className={`absolute bottom-0 left-0 w-[166.829px] h-[216px] transition-transform duration-1000 ease-out ${
+            mounted ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        >
           <Image
             src="/hero/hero1.jpeg"
             alt="Side profile portrait of a woman"
@@ -55,9 +72,13 @@ export default function Hero() {
   // Tablet version
   if (isTablet) {
     return (
-      <div className="relative w-full h-[500px]">
-        {/* Image right */}
-        <div className="absolute top-0 right-0 w-[414px] h-[393px]">
+      <div className="relative w-full h-[500px] overflow-hidden">
+        {/* Image right - slides from right */}
+        <div
+          className={`absolute top-0 right-0 w-[414px] h-[393px] transition-transform duration-1000 ease-out ${
+            mounted ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
           <Image
             src="/hero/hero2.jpeg"
             alt="Woman with sunglasses walking down runway"
@@ -67,10 +88,14 @@ export default function Hero() {
           />
         </div>
 
-        {/* Image left */}
-        <div className="absolute bottom-0 left-0 w-[215.488px] h-[279px]">
+        {/* Image left - slides from left */}
+        <div
+          className={`absolute bottom-0 left-0 w-[215.488px] h-[279px] transition-transform duration-1000 ease-out ${
+            mounted ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        >
           <Image
-            src="/hero/hero1.jpe"
+            src="/hero/hero1.jpeg"
             alt="Side profile portrait of a woman"
             fill
             className="object-cover"
@@ -87,9 +112,13 @@ export default function Hero() {
 
   // Desktop version
   return (
-    <div className="relative w-full h-[600px]">
-      {/* Image right */}
-      <div className="absolute top-0 right-0 w-[524.597px] h-[498px]">
+    <div className="relative w-full h-[600px] overflow-hidden">
+      {/* Image right - slides from right */}
+      <div
+        className={`absolute top-0 right-0 w-[524.597px] h-[498px] transition-transform duration-1000 ease-out ${
+          mounted ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
         <Image
           src="/hero/hero2.jpeg"
           alt="Woman with sunglasses walking down runway"
@@ -99,8 +128,12 @@ export default function Hero() {
         />
       </div>
 
-      {/* Image left */}
-      <div className="absolute bottom-0 left-0 w-[285px] h-[369px]">
+      {/* Image left - slides from left */}
+      <div
+        className={`absolute bottom-0 left-0 w-[285px] h-[369px] transition-transform duration-1000 ease-out ${
+          mounted ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
         <Image
           src="/hero/hero1.jpeg"
           alt="Side profile portrait of a woman"
