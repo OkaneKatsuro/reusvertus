@@ -34,19 +34,19 @@ export default function HeaderNavigation({ className = "" }: HeaderNavigationPro
   const navLinks = (
     <>
       <Link
-        href="/work"
-        className="flex items-center justify-center px-[5px] py-[3px] uppercase"
-      >
-        Work
-      </Link>
-      <Link
         href="/about"
         className="flex items-center justify-center px-[5px] py-[3px] uppercase"
       >
         About
       </Link>
       <Link
-        href="/contact"
+        href="/people"
+        className="flex items-center justify-center px-[5px] py-[3px] uppercase"
+      >
+        People
+      </Link>
+      <Link
+        href="/contacts"
         className="flex items-center justify-center px-[5px] py-[3px] uppercase"
       >
         Contact
