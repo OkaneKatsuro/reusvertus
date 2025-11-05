@@ -1,10 +1,8 @@
 "use client";
 
-import HeaderNavigation from "@/components/HeaderNavigation";
-import Footer from "@/components/Footer";
 import { useState } from "react";
 
-export default function FAQPage() {
+export default function FAQ() {
   const [openSection, setOpenSection] = useState<string | null>(null);
 
   const sections = [
@@ -26,25 +24,18 @@ export default function FAQPage() {
   };
 
   return (
-    <div className="min-h-screen bg-bg-1 flex flex-col">
-      <HeaderNavigation className="py-6" />
+    <section className="w-full bg-bg-1 py-12">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl uppercase mb-8">FAQ (Помощь покупателю)</h2>
 
-      <div className="flex-grow max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
-        {/* Hero Title */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl uppercase mb-4">FAQ</h1>
-          <p className="text-xl opacity-70">Помощь покупателю</p>
-        </div>
-
-        {/* FAQ Sections */}
-        <section className="space-y-4">
+        <div className="space-y-4">
           {sections.map((section) => (
             <div key={section} className="border-b border-black/20">
               <button
                 onClick={() => toggleSection(section)}
                 className="w-full py-4 text-left flex items-center justify-between hover:opacity-70 transition-opacity uppercase"
               >
-                <span className="text-lg font-medium">{section}</span>
+                <span className="text-base font-medium">{section}</span>
                 <svg
                   className={`w-5 h-5 transition-transform ${
                     openSection === section ? "rotate-180" : ""
@@ -68,10 +59,9 @@ export default function FAQPage() {
               )}
             </div>
           ))}
-        </section>
+        </div>
       </div>
-
-      <Footer />
-    </div>
+    </section>
   );
 }
+

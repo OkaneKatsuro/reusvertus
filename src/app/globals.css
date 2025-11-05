@@ -12,10 +12,14 @@
 }
 
 :root {
+  /* Floral White #FFF8F0 */
   --bg-1: #FFF8F0;
-  --bg-2: #D0DEBB;
+  /* Tea Green Pantone 7485 C */
+  --bg-2: #C9E5C0;
+  /* Rich Black #050517 */
   --bg-3: #050517;
-  --bg-4: #006341;
+  /* Dartmouth Green Pantone 3425 C */
+  --bg-4: #00703C;
 }
 
 @theme inline {

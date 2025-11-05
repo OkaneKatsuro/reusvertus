@@ -1,17 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 export default function Footer() {
   const [isMobile, setIsMobile] = useState(false);
-  const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
       setIsMobile(width < 800);
-      setIsTablet(width >= 800 && width < 1280);
     };
 
     handleResize();
@@ -22,222 +21,148 @@ export default function Footer() {
   // Mobile version
   if (isMobile) {
     return (
-      <div className="bg-bg-1 w-full p-[5px]">
-        <footer className="bg-bg-4 w-full">
-          <div className="flex flex-col items-center w-full">
-            <div className="flex flex-col gap-5 items-center px-10 py-[30px] w-full">
-              {/* Upper links */}
-              <div className="flex items-start justify-between pb-[100px] w-full text-white uppercase text-base leading-none">
-                <p>Reus Vertes</p>
-                <p className="text-right">Russia, Moscow</p>
-              </div>
+      <footer className="bg-bg-4 text-white py-8">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="space-y-6">
+            {/* Основные ссылки */}
+            <div className="flex flex-col gap-4 text-sm uppercase">
+              <Link href="/about" className="hover:opacity-70 transition-opacity">
+                О бренде
+              </Link>
+              <Link href="/contacts" className="hover:opacity-70 transition-opacity">
+                Контакты
+              </Link>
+              <Link href="/faq" className="hover:opacity-70 transition-opacity">
+                FAQ (Помощь покупателю)
+              </Link>
+            </div>
 
-              {/* Socials */}
-              <div className="flex items-center justify-between w-full h-[13px] text-white uppercase text-base">
-                <Link href="mailto:hello@figma.com" className="leading-none">
-                  EMAIL
-                </Link>
-                <Link href="https://www.instagram.com/figma" className="text-center leading-none">
-                  INSTA
-                </Link>
-                <Link href="http://linkedin.com/company/figma" className="text-right leading-none">
-                  LINKEDIN
-                </Link>
-              </div>
+            {/* Соцсети */}
+            <div className="flex gap-4 text-sm uppercase pt-4 border-t border-white/20">
+              <Link
+                href="https://instagram.com/reusvertes"
+                target="_blank"
+                className="hover:opacity-70 transition-opacity"
+              >
+                Instagram
+              </Link>
+              <Link
+                href="https://t.me/reusvertes"
+                target="_blank"
+                className="hover:opacity-70 transition-opacity"
+              >
+                Telegram
+              </Link>
+              <Link
+                href="https://vk.com/reusvertes"
+                target="_blank"
+                className="hover:opacity-70 transition-opacity"
+              >
+                VK
+              </Link>
+            </div>
 
-              {/* Footer Links Strip */}
-              <div className="w-full py-6 border-y border-white/20">
-                <div className="flex flex-col items-center gap-2 text-white text-xs uppercase">
-                  <Link href="/delivery" className="hover:opacity-70 transition-opacity">
-                    Доставка и оплата
-                  </Link>
-                  <Link href="/privacy" className="hover:opacity-70 transition-opacity">
-                    Политика конфиденциальности
-                  </Link>
-                  <Link href="/returns" className="hover:opacity-70 transition-opacity">
-                    Обмен и возврат
-                  </Link>
-                  <Link href="/faq" className="hover:opacity-70 transition-opacity">
-                    FAQ
-                  </Link>
-                  <Link href="/contacts" className="hover:opacity-70 transition-opacity">
-                    Контакты
-                  </Link>
-                </div>
+            {/* Поддержка Фонда содействия инновациям */}
+            <div className="pt-4 border-t border-white/20 space-y-4">
+              <div className="flex items-center gap-3">
+                <Image
+                  src="/FASIE.svg"
+                  alt="Фонд содействия инновациям"
+                  width={100}
+                  height={56}
+                  className="h-auto"
+                />
               </div>
+              <p className="text-xs opacity-80 leading-relaxed">
+                Проект реализован при поддержке Фонда содействия инновациям в рамках программы «Студенческий стартап» 
+                мероприятия «Платформа университетского технологического предпринимательства» 
+                федерального проекта «Технологии».
+              </p>
+            </div>
 
-              {/* Made By */}
-              <p className="text-center w-full leading-none text-white uppercase text-base mt-[120px]">MADE BY</p>
-
-              {/* Initials - Centered */}
-              <div className="w-full overflow-visible flex items-center justify-center">
-                <Link
-                  href="/"
-                  className="flex items-center justify-center text-white"
-                  style={{
-                    fontFamily: "'NATS', 'IBM Plex Mono', monospace",
-                    fontSize: '200px',
-                    lineHeight: '0.6',
-                    letterSpacing: '-0.02em'
-                  }}
-                >
-                  <span>R</span>
-                  <span>.</span>
-                  <span>V</span>
-                </Link>
-              </div>
+            {/* ИНН и информация о компании */}
+            <div className="pt-4 border-t border-white/20 text-xs opacity-70 space-y-1">
+              <p>ИНН: 123456789012</p>
+              <p>ОГРН: 1234567890123</p>
+              <p>© 2024 Reus Vertes. Все права защищены.</p>
             </div>
           </div>
-        </footer>
-      </div>
-    );
-  }
-
-  // Tablet version
-  if (isTablet) {
-    return (
-      <div className="bg-bg-1 w-full p-[5px]">
-        <footer className="bg-bg-4 w-full">
-          <div className="flex flex-col items-center w-full">
-            <div className="flex flex-col gap-5 items-center px-10 py-[30px] w-full">
-              {/* Upper links */}
-              <div className="flex items-start justify-between pb-[100px] w-full text-white uppercase text-base leading-none">
-                <p>Reus Vertes</p>
-                <p className="text-center">Couture Production</p>
-                <p className="text-right">Russia, Moscow</p>
-              </div>
-
-              {/* Socials */}
-              <div className="flex items-center justify-between w-full h-[13px] text-white uppercase text-base">
-                <Link href="mailto:hello@figma.com" className="leading-none">
-                  EMAIL
-                </Link>
-                <Link href="https://www.instagram.com/figma" className="text-center leading-none">
-                  INSTA
-                </Link>
-                <Link href="http://linkedin.com/company/figma" className="text-right leading-none">
-                  LINKEDIN
-                </Link>
-              </div>
-
-              {/* Footer Links Strip */}
-              <div className="w-full py-8 border-y border-white/20">
-                <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-white text-xs uppercase">
-                  <Link href="/delivery" className="hover:opacity-70 transition-opacity">
-                    Доставка и оплата
-                  </Link>
-                  <Link href="/privacy" className="hover:opacity-70 transition-opacity">
-                    Политика конфиденциальности
-                  </Link>
-                  <Link href="/returns" className="hover:opacity-70 transition-opacity">
-                    Обмен и возврат
-                  </Link>
-                  <Link href="/faq" className="hover:opacity-70 transition-opacity">
-                    FAQ
-                  </Link>
-                  <Link href="/contacts" className="hover:opacity-70 transition-opacity">
-                    Контакты
-                  </Link>
-                </div>
-              </div>
-
-              {/* Made By */}
-              <p className="text-center w-full leading-none text-white uppercase text-base mt-[120px]">MADE BY</p>
-
-              {/* Initials - Centered */}
-              <div className="w-full overflow-visible flex items-center justify-center">
-                <Link
-                  href="/"
-                  className="flex items-center justify-center text-white"
-                  style={{
-                    fontFamily: "'NATS', 'IBM Plex Mono', monospace",
-                    fontSize: '400px',
-                    lineHeight: '0.6',
-                    letterSpacing: '-0.02em'
-                  }}
-                >
-                  <span>R</span>
-                  <span>.</span>
-                  <span>V</span>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </footer>
-      </div>
+        </div>
+      </footer>
     );
   }
 
   // Desktop version
   return (
-    <div className="bg-bg-1 w-full p-[5px]">
-      <footer className="bg-bg-4 w-full">
-        <div className="flex flex-col items-center w-full">
-          <div className="flex flex-col gap-5 items-center px-10 py-[30px] w-full">
-            {/* Upper links */}
-            <div className="flex items-start justify-between pb-[100px] w-full text-white uppercase text-base leading-none">
-              <p>Reus Vertes</p>
-              <p className="text-center">Couture Production</p>
-              <p className="text-right">Russia, Moscow</p>
-            </div>
+    <footer className="bg-bg-4 text-white py-6">
+      <div className="max-w-5xl mx-auto px-4">
+        <div className="flex items-center justify-between flex-wrap gap-6">
+          {/* Основные ссылки */}
+          <div className="flex gap-6 text-sm uppercase">
+            <Link href="/about" className="hover:opacity-70 transition-opacity">
+              О бренде
+            </Link>
+            <Link href="/contacts" className="hover:opacity-70 transition-opacity">
+              Контакты
+            </Link>
+            <Link href="/faq" className="hover:opacity-70 transition-opacity">
+              FAQ (Помощь покупателю)
+            </Link>
+          </div>
 
-            {/* Socials */}
-            <div className="flex items-center justify-between w-full h-[13px] text-white uppercase text-base">
-              <Link href="mailto:hello@figma.com" className="leading-none">
-                EMAIL
-              </Link>
-              <Link href="https://www.instagram.com/figma" className="text-center leading-none">
-                INSTA
-              </Link>
-              <Link href="http://linkedin.com/company/figma" className="text-right leading-none">
-                LINKEDIN
-              </Link>
-            </div>
-
-            {/* Footer Links Strip */}
-            <div className="w-full py-8 border-y border-white/20">
-              <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-white text-xs uppercase">
-                <Link href="/delivery" className="hover:opacity-70 transition-opacity">
-                  Доставка и оплата
-                </Link>
-                <Link href="/privacy" className="hover:opacity-70 transition-opacity">
-                  Политика конфиденциальности
-                </Link>
-                <Link href="/returns" className="hover:opacity-70 transition-opacity">
-                  Обмен и возврат
-                </Link>
-                <Link href="/faq" className="hover:opacity-70 transition-opacity">
-                  FAQ
-                </Link>
-                <Link href="/contacts" className="hover:opacity-70 transition-opacity">
-                  Контакты
-                </Link>
-              </div>
-            </div>
-
-            {/* Made By */}
-            <p className="text-center w-full leading-none text-white uppercase text-base mt-[120px]">MADE BY</p>
-
-            {/* Initials - Centered */}
-            <div className="w-full overflow-visible flex items-center justify-center">
-              <Link
-                href="/"
-                className="flex items-center justify-center text-white"
-                style={{
-                  fontFamily: "'NATS', 'IBM Plex Mono', monospace",
-                  fontSize: '605px',
-                  lineHeight: '0.6',
-                  letterSpacing: '-0.02em'
-                }}
-              >
-                <span>R</span>
-                <span>.</span>
-                <span>V</span>
-              </Link>
-            </div>
+          {/* Соцсети */}
+          <div className="flex gap-4 text-sm uppercase">
+            <Link
+              href="https://instagram.com/reusvertes"
+              target="_blank"
+              className="hover:opacity-70 transition-opacity"
+            >
+              Instagram
+            </Link>
+            <Link
+              href="https://t.me/reusvertes"
+              target="_blank"
+              className="hover:opacity-70 transition-opacity"
+            >
+              Telegram
+            </Link>
+            <Link
+              href="https://vk.com/reusvertes"
+              target="_blank"
+              className="hover:opacity-70 transition-opacity"
+            >
+              VK
+            </Link>
           </div>
         </div>
-      </footer>
-    </div>
+
+        {/* Поддержка Фонда содействия инновациям */}
+        <div className="mt-6 pt-6 border-t border-white/20 space-y-4">
+          <div className="flex items-center gap-4">
+            <Image
+              src="/FASIE.svg"
+              alt="Фонд содействия инновациям"
+              width={120}
+              height={68}
+              className="h-auto"
+            />
+          </div>
+          <p className="text-xs opacity-80 leading-relaxed max-w-3xl">
+            Проект реализован при поддержке Фонда содействия инновациям в рамках программы «Студенческий стартап» 
+            мероприятия «Платформа университетского технологического предпринимательства» 
+            федерального проекта «Технологии».
+          </p>
+        </div>
+
+        {/* ИНН и информация о компании */}
+        <div className="mt-6 pt-6 border-t border-white/20 text-xs opacity-70 flex items-center justify-between flex-wrap gap-4">
+          <div className="space-y-1">
+            <p>ИНН: 123456789012</p>
+            <p>ОГРН: 1234567890123</p>
+          </div>
+          <p>© 2024 Reus Vertes. Все права защищены.</p>
+        </div>
+      </div>
+    </footer>
   );
 }

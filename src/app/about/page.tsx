@@ -1,15 +1,14 @@
 import HeaderNavigation from "@/components/HeaderNavigation";
 import Footer from "@/components/Footer";
+import Image from "next/image";
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-bg-1">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <HeaderNavigation className="py-6" />
-      </div>
+      <HeaderNavigation className="py-6" />
 
       {/* About Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
 
         {/* Hero Title */}
         <div className="text-center">
@@ -100,6 +99,163 @@ export default function AboutPage() {
                 Каждый человек уникален, и наша одежда призвана подчеркнуть это,
                 а не навязать определенный образ.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Команда */}
+        <section className="space-y-8">
+          <h2 className="text-2xl uppercase border-b border-black/20 pb-2">Команда</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="space-y-4">
+              <div className="relative aspect-square bg-bg-2 rounded-lg overflow-hidden">
+                <Image
+                  src="/shirt/shirt1.png"
+                  alt="Команда"
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold uppercase">Алексей Иванов</h3>
+                <p className="text-sm opacity-70 uppercase">Creative Director</p>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <div className="relative aspect-square bg-bg-2 rounded-lg overflow-hidden">
+                <Image
+                  src="/shirt/shirt2.png"
+                  alt="Команда"
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold uppercase">Мария Петрова</h3>
+                <p className="text-sm opacity-70 uppercase">Lead Designer</p>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <div className="relative aspect-square bg-bg-2 rounded-lg overflow-hidden">
+                <Image
+                  src="/shirt/shirt1.png"
+                  alt="Команда"
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold uppercase">Дмитрий Сидоров</h3>
+                <p className="text-sm opacity-70 uppercase">Production Manager</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Амбассадоры */}
+        <section className="space-y-8">
+          <div>
+            <h2 className="text-2xl uppercase border-b border-black/20 pb-2">Амбассадоры</h2>
+            <p className="mt-4 opacity-70 leading-relaxed">
+              Люди, которые разделяют наши ценности и вдохновляют нас. 
+              Наши амбассадоры — это творческие личности, которые через свой стиль и образ жизни 
+              воплощают философию Reus Vertes.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+            <div className="space-y-4">
+              <div className="relative aspect-[4/5] bg-bg-2 rounded-lg overflow-hidden">
+                <Image
+                  src="/shirt/shirt2.png"
+                  alt="Амбассадор"
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold uppercase">Анна Смирнова</h3>
+                <p className="text-base opacity-70">Модель и активист</p>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <div className="relative aspect-[4/5] bg-bg-2 rounded-lg overflow-hidden">
+                <Image
+                  src="/shirt/shirt1.png"
+                  alt="Амбассадор"
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold uppercase">Иван Козлов</h3>
+                <p className="text-base opacity-70">Фотограф</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Музы */}
+        <section className="space-y-8">
+          <div>
+            <h2 className="text-2xl uppercase border-b border-black/20 pb-2">Музы</h2>
+            <p className="mt-4 opacity-70 leading-relaxed">
+              Наши любимые модели, которые воплощают дух бренда
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="space-y-4">
+              <div className="relative aspect-[3/4] bg-bg-2 rounded-lg overflow-hidden group">
+                <Image
+                  src="/shirt/shirt2.png"
+                  alt="Муза"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <p className="text-sm uppercase">Наша муза сезона весна 2024</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold uppercase">Екатерина Волкова</h3>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <div className="relative aspect-[3/4] bg-bg-2 rounded-lg overflow-hidden group">
+                <Image
+                  src="/shirt/shirt1.png"
+                  alt="Муза"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <p className="text-sm uppercase">Лицо коллекции</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold uppercase">София Новикова</h3>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <div className="relative aspect-[3/4] bg-bg-2 rounded-lg overflow-hidden group">
+                <Image
+                  src="/shirt/shirt2.png"
+                  alt="Муза"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <p className="text-sm uppercase">Амбассадор бренда</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold uppercase">Дарья Морозова</h3>
+              </div>
             </div>
           </div>
         </section>

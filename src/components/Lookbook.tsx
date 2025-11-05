@@ -30,7 +30,7 @@ export default function Lookbook() {
   if (isMobile) {
     return (
       <div className="w-full bg-bg-1 py-12">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-5xl mx-auto px-4">
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl uppercase">Lookbook</h2>
@@ -75,7 +75,7 @@ export default function Lookbook() {
   if (isTablet) {
     return (
       <div className="w-full bg-bg-1 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
           {/* Header */}
           <div className="flex items-center justify-between mb-10">
             <h2 className="text-3xl uppercase">Lookbook</h2>
@@ -119,7 +119,7 @@ export default function Lookbook() {
   // Desktop version
   return (
     <div className="w-full bg-bg-1 py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
           <h2 className="text-3xl uppercase">Lookbook</h2>
