@@ -1,89 +1,120 @@
 import HeaderNavigation from "@/components/HeaderNavigation";
-import Hero from "@/components/Hero";
-import ShirtAnimation from "@/components/ShirtAnimation";
-import ProductDetails from "@/components/ProductDetails";
-import Lookbook from "@/components/Lookbook";
 import Footer from "@/components/Footer";
+import FAQ from "@/components/FAQ";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-bg-1">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <HeaderNavigation className="py-6" />
-      </div>
+      <HeaderNavigation className="py-6" />
 
-      {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <Hero />
-      </div>
+      {/* Блок №1: Статичное фото - полноширинное */}
+      <section className="w-full">
+        <div className="relative w-full h-screen bg-bg-2 overflow-hidden flex items-center justify-center">
+          <span className="text-bg-3 opacity-30 uppercase text-sm text-center px-4 max-w-2xl">
+            Зеленая улица с граффити и нашими брендовыми коробками, фото футболок на столбах, футболки на улице, две длинные полоски на которые повесили футболку
+          </span>
+        </div>
+      </section>
 
-      {/* Shirt Animation Section */}
-      <ShirtAnimation />
+      {/* Блок №2: Видео - полноширинное */}
+      <section className="w-full">
+        <div className="relative w-full h-screen bg-bg-2 overflow-hidden flex items-center justify-center">
+          <span className="text-bg-3 opacity-30 uppercase text-sm text-center px-4 max-w-2xl">
+            Видео: футболка идет по улице, модели идут в кадр по двум зеленым линиям (логотипу), парень в футболке кидает шарик с краской в камеру, появляется лого, стоит парень, в него с двух сторон кидают шариками с краской (снято на пленку)
+          </span>
+        </div>
+      </section>
 
-      {/* Product Details Section */}
-      <ProductDetails />
-
-      {/* Lookbook Section */}
-      <Lookbook />
-
-      {/* Demo Content (optional - можно удалить позже) */}
-      <div className="max-w-4xl mx-auto px-8 space-y-12 py-8">
-        {/* Typography Demo */}
-        <section className="space-y-6">
-          <div>
-            <h1>Heading 1: Design System</h1>
-            <p className="text-sm text-gray-600 mt-2">24px, line-height: 95%, letter-spacing: -2%</p>
-          </div>
-
-          <div>
-            <h2>Heading 2: Typography</h2>
-            <p className="text-sm text-gray-600 mt-2">16px, line-height: 80%, letter-spacing: -2%</p>
-          </div>
-
-          <div>
-            <a href="#" className="underline">Example Link</a>
-            <p className="text-sm text-gray-600 mt-2">Regular 16px</p>
-          </div>
-        </section>
-
-        {/* Color Palette */}
-        <section className="space-y-4">
-          <h2>Color Palette</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-bg-1 border border-gray-300 p-6 rounded-lg">
-              <div className="text-sm font-mono">bg-bg-1</div>
-              <div className="text-xs text-gray-600 mt-1">#FFF8F0</div>
+      {/* Блок №3: Карта улицы - полноширинные изображения с наложенными текстами */}
+      <section className="w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {/* Фото (мужское) - полноширинное с наложенным текстом */}
+          <Link href="/men" className="group relative w-full h-[90vh] bg-bg-2 overflow-hidden flex items-center justify-center">
+            <span className="text-bg-3 opacity-30 uppercase text-sm absolute">ФОТО (мужское)</span>
+            {/* Наложенный текстовый блок */}
+            <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/10 transition-colors">
+              <div className="text-center z-10">
+                <h3 className="text-4xl md:text-5xl lg:text-6xl uppercase font-medium text-white mb-4" style={{ fontFamily: 'var(--font-ibm-plex-mono)', fontWeight: 500 }}>
+                  Мужское
+                </h3>
+                <p className="text-lg md:text-xl uppercase text-white opacity-90" style={{ fontFamily: 'var(--font-ibm-plex-mono)', fontWeight: 400 }}>
+                  Shop Men's
+                </p>
+              </div>
             </div>
+          </Link>
 
-            <div className="bg-bg-2 border border-gray-300 p-6 rounded-lg">
-              <div className="text-sm font-mono">bg-bg-2</div>
-              <div className="text-xs text-gray-600 mt-1">#D0DEBB</div>
+          {/* Фото (женское) - полноширинное с наложенным текстом */}
+          <Link href="/women" className="group relative w-full h-[90vh] bg-bg-2 overflow-hidden flex items-center justify-center">
+            <span className="text-bg-3 opacity-30 uppercase text-sm absolute">ФОТО (женское)</span>
+            {/* Наложенный текстовый блок */}
+            <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/10 transition-colors">
+              <div className="text-center z-10">
+                <h3 className="text-4xl md:text-5xl lg:text-6xl uppercase font-medium text-white mb-4" style={{ fontFamily: 'var(--font-ibm-plex-mono)', fontWeight: 500 }}>
+                  Женское
+                </h3>
+                <p className="text-lg md:text-xl uppercase text-white opacity-90" style={{ fontFamily: 'var(--font-ibm-plex-mono)', fontWeight: 400 }}>
+                  Shop Women's
+                </p>
+              </div>
             </div>
+          </Link>
+        </div>
+      </section>
 
-            <div className="bg-bg-3 border border-gray-300 p-6 rounded-lg text-white">
-              <div className="text-sm font-mono">bg-bg-3</div>
-              <div className="text-xs text-gray-300 mt-1">#050517</div>
-            </div>
-
-            <div className="bg-bg-4 border border-gray-300 p-6 rounded-lg text-white">
-              <div className="text-sm font-mono">bg-bg-4</div>
-              <div className="text-xs text-gray-300 mt-1">#006341</div>
+      {/* Блок №4: Достопримечательности - полноширинное изображение */}
+      <section className="w-full">
+        <div className="relative w-full h-[80vh] bg-bg-2 overflow-hidden flex items-center justify-center">
+          <span className="text-bg-3 opacity-30 uppercase text-sm">Актуальное (бестселлеры)</span>
+          {/* Наложенный текстовый блок */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center z-10">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl uppercase font-medium text-white mb-4" style={{ fontFamily: 'var(--font-ibm-plex-mono)', fontWeight: 500 }}>
+                Достопримечательности
+              </h2>
+              <p className="text-lg md:text-xl uppercase text-white opacity-90" style={{ fontFamily: 'var(--font-ibm-plex-mono)', fontWeight: 400 }}>
+                Актуальное (бестселлеры)
+              </p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Font Demo */}
-        <section className="space-y-4">
-          <h2>Font: IBM Plex Mono</h2>
-          <div className="space-y-2">
-            <p className="font-normal">Regular: The quick brown fox jumps over the lazy dog</p>
-            <p className="font-medium">Medium: The quick brown fox jumps over the lazy dog</p>
-            <p className="font-semibold">Semibold: The quick brown fox jumps over the lazy dog</p>
-            <p className="font-bold">Bold: The quick brown fox jumps over the lazy dog</p>
-          </div>
-        </section>
-      </div>
+      {/* Блок №5: Прохожие - полноширинные изображения в сетке */}
+      <section className="w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {/* Примеры готовых луков от креаторов */}
+          {[1, 2, 3, 4, 5, 6].map((item) => (
+            <div
+              key={item}
+              className="relative w-full h-[70vh] bg-bg-2 overflow-hidden flex items-center justify-center group"
+            >
+              <span className="text-bg-3 opacity-30 uppercase text-xs text-center px-4 absolute">
+                Креаторы (фото примеры готовых луков с нашей одеждой разных креаторов)
+              </span>
+              {/* Наложенный текстовый блок при наведении */}
+              <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-colors">
+                <div className="text-center z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <p className="text-sm uppercase text-white">Look {item}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Блок №6: Почтовый ящик - полноширинное изображение */}
+      <section className="w-full">
+        <div className="relative w-full h-[70vh] bg-bg-2 overflow-hidden flex items-center justify-center">
+          <span className="text-bg-3 opacity-30 uppercase text-sm text-center px-4">
+            Фото зеленого почтового ящика (скидка за подписку на имейл)
+          </span>
+        </div>
+      </section>
+
+      {/* Блок №7: FAQ */}
+      <FAQ />
 
       {/* Footer */}
       <Footer />

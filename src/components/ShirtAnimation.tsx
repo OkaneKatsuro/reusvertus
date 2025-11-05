@@ -26,7 +26,7 @@ export default function ShirtAnimation() {
   if (isMobile) {
     return (
       <div className="w-full bg-bg-1 py-12 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-5xl mx-auto px-4">
           <div className="relative h-[400px] flex items-center justify-center">
             {/* Анимированная футболка */}
             <div
@@ -87,7 +87,7 @@ export default function ShirtAnimation() {
   if (isTablet) {
     return (
       <div className="w-full bg-bg-1 py-16 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="relative h-[500px] flex items-center justify-center">
             {/* Анимированная футболка */}
             <div
@@ -147,7 +147,7 @@ export default function ShirtAnimation() {
   // Desktop version
   return (
     <div className="w-full bg-bg-1 py-20 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative h-[600px] flex items-center justify-center">
           {/* Анимированная футболка */}
           <div

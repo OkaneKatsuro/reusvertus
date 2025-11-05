@@ -1,0 +1,352 @@
+"use client";
+
+import HeaderNavigation from "@/components/HeaderNavigation";
+import Footer from "@/components/Footer";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
+
+interface CartItem {
+  id: string;
+  quantity: number;
+  size: string | null;
+  color: string | null;
+  product: {
+    id: string;
+    name: string;
+    code: string;
+    price: number;
+    imageUrl: string | null;
+  };
+}
+
+export default function CartPage() {
+  const { user } = useAuth();
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isOrdering, setIsOrdering] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [orderData, setOrderData] = useState({
+    address: "",
+    phone: "",
+    email: user?.email || "",
+  });
+
+  useEffect(() => {
+    if (user) {
+      loadCart();
+    } else {
+      setIsLoading(false);
+    }
+  }, [user]);
+
+  const loadCart = async () => {
+    if (!user) return;
+
+    try {
+      const response = await fetch("/api/cart", {
+        headers: {
+          "x-user-id": user.id,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setCartItems(data.cartItems || []);
+        setError(null);
+      } else {
+        setError("Ошибка при загрузке корзины");
+      }
+    } catch (error) {
+      console.error("Error loading cart:", error);
+      setError("Ошибка при загрузке корзины");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const removeItem = async (itemId: string) => {
+    if (!user) return;
+
+    try {
+      const response = await fetch(`/api/cart?itemId=${itemId}`, {
+        method: "DELETE",
+        headers: {
+          "x-user-id": user.id,
+        },
+      });
+
+      if (response.ok) {
+        loadCart();
+      }
+    } catch (error) {
+      console.error("Error removing item:", error);
+    }
+  };
+
+  const updateQuantity = async (itemId: string, quantity: number) => {
+    if (!user || quantity < 1) return;
+
+    try {
+      const response = await fetch("/api/cart", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "x-user-id": user.id,
+        },
+        body: JSON.stringify({ itemId, quantity }),
+      });
+
+      if (response.ok) {
+        loadCart();
+      }
+    } catch (error) {
+      console.error("Error updating quantity:", error);
+    }
+  };
+
+  const handleOrder = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!user) return;
+
+    setIsOrdering(true);
+    try {
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-user-id": user.id,
+        },
+        body: JSON.stringify(orderData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert("Заказ успешно оформлен!");
+        setCartItems([]);
+        setOrderData({ address: "", phone: "", email: user.email || "" });
+      } else {
+        const error = await response.json();
+        alert(error.error || "Ошибка при оформлении заказа");
+      }
+    } catch (error) {
+      console.error("Error creating order:", error);
+      alert("Ошибка при оформлении заказа");
+    } finally {
+      setIsOrdering(false);
+    }
+  };
+
+  const total = cartItems.reduce(
+    (sum, item) => sum + item.product.price * item.quantity,
+    0
+  );
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-bg-1 flex flex-col">
+        <HeaderNavigation className="py-6" />
+        <div className="flex-grow flex items-center justify-center">
+          <p>Загрузка...</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-bg-1 flex flex-col">
+        <HeaderNavigation className="py-6" />
+        <div className="flex-grow max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+          <div className="text-center py-12">
+            <p className="opacity-70 mb-6 uppercase">{error}</p>
+            <button
+              onClick={() => {
+                setError(null);
+                loadCart();
+              }}
+              className="inline-block bg-bg-4 text-white px-6 py-3 uppercase hover:opacity-90 transition-opacity"
+            >
+              Попробовать снова
+            </button>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-bg-1 flex flex-col">
+        <HeaderNavigation className="py-6" />
+        <div className="flex-grow max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+          <div className="text-center py-12">
+            <p className="opacity-70 mb-6">
+              Для просмотра корзины необходимо войти в аккаунт
+            </p>
+            <Link
+              href="/profile"
+              className="inline-block bg-bg-4 text-white px-6 py-3 uppercase hover:opacity-90 transition-opacity"
+            >
+              Войти
+            </Link>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-bg-1 flex flex-col">
+      <HeaderNavigation className="py-6" />
+
+      <div className="flex-grow max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+        <h1 className="text-2xl uppercase mb-8">Корзина</h1>
+
+        {cartItems.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="opacity-70 mb-6">Корзина пуста</p>
+            <Link
+              href="/"
+              className="inline-block bg-bg-4 text-white px-6 py-3 uppercase hover:opacity-90 transition-opacity"
+            >
+              Перейти к покупкам
+            </Link>
+          </div>
+        ) : (
+          <div className="space-y-6">
+            {/* Товары в корзине */}
+            {cartItems.map((item) => (
+              <div
+                key={item.id}
+                className="flex gap-4 border-b border-black/10 pb-6"
+              >
+                <div className="w-24 h-24 bg-bg-2 rounded flex items-center justify-center">
+                  {item.product.imageUrl ? (
+                    <img
+                      src={item.product.imageUrl}
+                      alt={item.product.name}
+                      className="w-full h-full object-cover rounded"
+                    />
+                  ) : (
+                    <span className="text-xs opacity-30">Фото</span>
+                  )}
+                </div>
+                <div className="flex-1">
+                  <Link
+                    href={`/product/${item.product.id}`}
+                    className="hover:opacity-70 transition-opacity"
+                  >
+                    <h3 className="uppercase font-medium">{item.product.name}</h3>
+                    <p className="text-sm opacity-70">{item.product.code}</p>
+                  </Link>
+                  {item.size && (
+                    <p className="text-xs opacity-60 mt-1">Размер: {item.size}</p>
+                  )}
+                  {item.color && (
+                    <p className="text-xs opacity-60">Цвет: {item.color}</p>
+                  )}
+                  <div className="flex items-center gap-4 mt-2">
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() =>
+                          updateQuantity(item.id, item.quantity - 1)
+                        }
+                        className="w-8 h-8 border border-black/20 rounded flex items-center justify-center hover:bg-black/5"
+                      >
+                        -
+                      </button>
+                      <span className="w-8 text-center">{item.quantity}</span>
+                      <button
+                        onClick={() =>
+                          updateQuantity(item.id, item.quantity + 1)
+                        }
+                        className="w-8 h-8 border border-black/20 rounded flex items-center justify-center hover:bg-black/5"
+                      >
+                        +
+                      </button>
+                    </div>
+                    <p className="text-lg font-medium">
+                      {item.product.price * item.quantity} ₽
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => removeItem(item.id)}
+                  className="text-sm underline opacity-70 hover:opacity-100 self-start"
+                >
+                  Удалить
+                </button>
+              </div>
+            ))}
+
+            {/* Итого */}
+            <div className="border-t border-black/20 pt-6 space-y-6">
+              <div className="flex justify-between items-center">
+                <span className="text-xl uppercase">Итого:</span>
+                <span className="text-2xl font-semibold">{total} ₽</span>
+              </div>
+
+              {/* Форма оформления заказа */}
+              <form onSubmit={handleOrder} className="space-y-4">
+                <div>
+                  <label className="block text-sm uppercase mb-2">
+                    Адрес доставки
+                  </label>
+                  <input
+                    type="text"
+                    value={orderData.address}
+                    onChange={(e) =>
+                      setOrderData({ ...orderData, address: e.target.value })
+                    }
+                    required
+                    className="w-full px-4 py-3 border-2 border-black/20 rounded-lg focus:outline-none focus:border-bg-4 uppercase text-sm"
+                    placeholder="Адрес доставки"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm uppercase mb-2">Телефон</label>
+                  <input
+                    type="tel"
+                    value={orderData.phone}
+                    onChange={(e) =>
+                      setOrderData({ ...orderData, phone: e.target.value })
+                    }
+                    required
+                    className="w-full px-4 py-3 border-2 border-black/20 rounded-lg focus:outline-none focus:border-bg-4 uppercase text-sm"
+                    placeholder="+7 (XXX) XXX-XX-XX"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm uppercase mb-2">Email</label>
+                  <input
+                    type="email"
+                    value={orderData.email}
+                    onChange={(e) =>
+                      setOrderData({ ...orderData, email: e.target.value })
+                    }
+                    required
+                    className="w-full px-4 py-3 border-2 border-black/20 rounded-lg focus:outline-none focus:border-bg-4 uppercase text-sm"
+                    placeholder="email@example.com"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={isOrdering}
+                  className="w-full bg-bg-4 text-white py-4 px-6 uppercase hover:opacity-90 transition-opacity disabled:opacity-50"
+                >
+                  {isOrdering ? "Оформление..." : "Оформить заказ"}
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <Footer />
+    </div>
+  );
+}
